@@ -11,13 +11,12 @@ program
 program.parse();
 
 const argv = program.opts();
-console.log(argv);
 
 const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case "list":
       const allContacts = await contactsApi.listContacts();
-      console.log(allContacts);
+      console.table(allContacts);
       break;
 
     case "get":
@@ -34,7 +33,7 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
       break;
 
     case "remove":
-      const deleteContact = await contactsApi.getContactById(id);
+      const deleteContact = await contactsApi.removeContact(id);
       if (deleteContact === null) {
         console.log("This contact was not found!");
       }
